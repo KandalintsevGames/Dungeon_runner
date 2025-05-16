@@ -15,16 +15,6 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.KEYDOWN:
-
-            if event.key == pygame.K_w:
-                player_rect.y -= 5
-            elif event.key == pygame.K_s:
-                player_rect.y += 5
-            elif event.key == pygame.K_a:
-                player_rect.x -= 5
-            elif event.key == pygame.K_d:
-                player_rect.x += 5
-    screen.blit(player,player_rect)
+       
     pygame.display.update()
 pygame.quit()
