@@ -21,6 +21,5 @@ def movement():
     if keys[K_a]:
         player_rect.x -= speed                
     if keys[K_d]:
-        player_rect.x += speed                
-            
+        player_rect.x += speed
 
