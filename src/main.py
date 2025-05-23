@@ -1,5 +1,6 @@
 import pygame
 import player
+from player import player_init
 from enemy import init_enemy,enemy_goto
 pygame.init()
 x = 1920
@@ -16,6 +17,8 @@ def game_loop():
     enemy_size = (100,100)
     enemy_img, enemy_rect = init_enemy(enemy_size)
 
+    player_img, player_rect = player_init()
+
     while running:
 
         screen.fill("white")
@@ -24,8 +27,8 @@ def game_loop():
                 running = False
 
         player.movement()
-        screen.blit(player.player,player.player_rect)
-        enemy_movement = enemy_goto(player.player_rect,enemy_rect)
+        screen.blit(player_img,player_rect)
+        enemy_movement = enemy_goto(player_rect,enemy_rect)
 
         enemy_rect.x += enemy_movement[0]
         enemy_rect.y += enemy_movement[1]
