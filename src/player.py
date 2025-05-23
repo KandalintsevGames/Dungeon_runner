@@ -12,7 +12,7 @@ player_rect = player.get_rect()
 
 
 def movement():
-    speed = 4
+    speed = 5
     keys =pygame.key.get_pressed()
     if keys[K_w]:
         player_rect.y -= speed                

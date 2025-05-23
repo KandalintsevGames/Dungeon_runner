@@ -19,10 +19,12 @@ def game_loop():
 
         player.movement()
         screen.blit(player.player,player.player_rect)
-        liste_enemy_movement = enemy.enemy_goto(player.player_rect,enemy.enemy_rect)
+        enemy_movement = enemy.enemy_goto(player.player_rect,enemy.enemy_rect)
 
-        print(liste_enemy_movement)
-        enemy.enemy_rect = enemy.enemy.get_rect(center = (enemy.enemy_rect.x + liste_enemy_movement[0],enemy.enemy_rect.y + liste_enemy_movement[1]))
+
+        #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
+        enemy.enemy_rect = enemy.enemy.get_rect(center = (enemy.enemy_rect.x + enemy_movement[0],enemy.enemy_rect.y + enemy_movement[1]))
+        
         screen.blit(enemy.enemy1,enemy.enemy_rect)
         pygame.display.update()
         clock.tick(FPS)
