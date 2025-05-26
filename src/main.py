@@ -14,7 +14,7 @@ def game_loop():
 
     # init enemy
     enemy_size = (100,100)
-    enemy_img, enemy_rect = init_enemy(enemy_size)
+    enemy_img, enemy_rect_dictionary, amount_enemy = init_enemy(enemy_size)
 
     while running:
 
@@ -25,15 +25,18 @@ def game_loop():
 
         player.movement()
         screen.blit(player.player,player.player_rect)
-        enemy_movement = enemy_goto(player.player_rect,enemy_rect)
+        
 
-        enemy_rect.x += enemy_movement[0]
-        enemy_rect.y += enemy_movement[1]
-
+        
 
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
         
-        screen.blit(enemy_img,enemy_rect)
+        for i in range(amount_enemy):
+            enemy_movement = enemy_goto(player.player_rect,enemy_rect_dictionary[i])
+            enemy_rect_dictionary[i].x += enemy_movement[0]
+            enemy_rect_dictionary[i].y += enemy_movement[1]
+
+            screen.blit(enemy_img,enemy_rect_dictionary[i])
         pygame.display.update()
         clock.tick(FPS)
 
