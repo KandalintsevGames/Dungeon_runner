@@ -16,6 +16,8 @@ def game_loop():
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy = init_enemy(enemy_size)
 
+    player_img , player_rect = player.player_init()
+
     while running:
 
         screen.fill("white")
@@ -23,8 +25,8 @@ def game_loop():
             if event.type == pygame.QUIT:
                 running = False
 
-        player.movement()
-        screen.blit(player.player,player.player_rect)
+        player.movement(player_rect)
+        screen.blit(player_img,player_rect)
         
 
         
@@ -32,7 +34,7 @@ def game_loop():
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
         
         for i in range(amount_enemy):
-            enemy_movement = enemy_goto(player.player_rect,enemy_rect_dictionary[i])
+            enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i])
             enemy_rect_dictionary[i].x += enemy_movement[0]
             enemy_rect_dictionary[i].y += enemy_movement[1]
             #if enemy_movement[2] > 0:
