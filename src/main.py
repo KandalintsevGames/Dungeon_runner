@@ -35,7 +35,8 @@ def game_loop():
             enemy_movement = enemy_goto(player.player_rect,enemy_rect_dictionary[i])
             enemy_rect_dictionary[i].x += enemy_movement[0]
             enemy_rect_dictionary[i].y += enemy_movement[1]
-
+            if enemy_movement[2] > 0:
+                player_life = player.damage(enemy_movement[2],player_life) 
             screen.blit(enemy_img,enemy_rect_dictionary[i])
         pygame.display.update()
         clock.tick(FPS)

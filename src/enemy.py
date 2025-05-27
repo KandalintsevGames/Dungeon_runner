@@ -16,6 +16,7 @@ def init_enemy(enemy_size):
 
 
 def enemy_goto(player_rect,enemy_rect):
+    damage = 100
     x_cor_difference =  player_rect.x - enemy_rect.x
     y_cor_difference = player_rect.y - enemy_rect.y 
     #Koordinatendifferenz
@@ -25,10 +26,11 @@ def enemy_goto(player_rect,enemy_rect):
     if length <= 100:
          update_enemy_x = 0
          update_enemy_y  = 0
+         damage = -100
     #Falls Gegner zu nahe kommt, bewegt er nicht
     else:
         update_enemy_x = 5 * ((x_cor_difference / (length)))
         update_enemy_y = 5 *((y_cor_difference / (length)))
     #Berechnung vom Einheitswektor von vohrher
-    return [round(update_enemy_x),round(update_enemy_y)]
+    return [round(update_enemy_x),round(update_enemy_y),damage]
     #Falls Gegner zu nahe kommt, bewegt er nicht
