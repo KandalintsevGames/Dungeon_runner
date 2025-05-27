@@ -4,7 +4,6 @@ import math
 
 
 def player_init():
-    global player_rect
     
     player_size = (100,100)
     player = pygame.image.load("src/assets/player_movement/movement1.png")
@@ -25,15 +24,15 @@ def player_init():
 #     return [int(update_enemy_x),int(update_enemy_y)]
 
 
-def movement():
+def movement(rect):
     speed = 5
     keys =pygame.key.get_pressed()
     if keys[K_w]:
-        player_rect.y -= speed                
+        rect.y -= speed                
     if keys[K_s]:
-        player_rect.y += speed                
+        rect.y += speed                
     if keys[K_a]:
-        player_rect.x -= speed                
+        rect.x -= speed                
     if keys[K_d]:
-        player_rect.x += speed
+        rect.x += speed
 

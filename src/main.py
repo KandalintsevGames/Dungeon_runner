@@ -26,7 +26,7 @@ def game_loop():
             if event.type == pygame.QUIT:
                 running = False
 
-        player.movement()
+        player.movement(player_rect)
         screen.blit(player_img,player_rect)
         enemy_movement = enemy_goto(player_rect,enemy_rect)
 
