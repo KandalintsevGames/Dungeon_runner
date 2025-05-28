@@ -19,15 +19,14 @@ def game_loop():
     player_img , player_rect = player.player_init()
     player_life = 100
     while running:
-        
-        screen.fill("white")
         screen.blit(backgrount_img,(0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
-        player.movement(player_rect)
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
+        while pygame.KEYDOWN:
+            player.movement(player_rect)
         screen.blit(player_img,player_rect)
 
 
@@ -47,7 +46,7 @@ def game_loop():
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
         pygame.display.update()
         clock.tick(FPS)
-
+        print(clock.tick(FPS))
     pygame.quit()
 if __name__ == "__main__":
     game_loop()
