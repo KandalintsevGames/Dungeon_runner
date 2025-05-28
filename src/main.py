@@ -2,10 +2,11 @@ import pygame
 import player
 from enemy import init_enemy,enemy_goto
 pygame.init()
+backgrount = pygame.image.load("src/assets/background.png")
 x = 1920
 y= 1080
 screen = pygame.display.set_mode((x,y))
-
+backgrount_img = pygame.transform.scale(backgrount,(x,y))
 def game_loop():
     FPS = 60
     clock = pygame.time.Clock()
@@ -18,7 +19,9 @@ def game_loop():
     player_img , player_rect = player.player_init()
     player_life = 100
     while running:
+        
         screen.fill("white")
+        screen.blit(backgrount_img,(0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
