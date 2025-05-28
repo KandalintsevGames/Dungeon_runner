@@ -20,9 +20,10 @@ def game_loop():
     player_img , player_rect = player.player_init()
     player_life = 100
     test = 0
+    amount_cat = 100
     while running:
         test +=1
-        if test == 2:
+        if test == amount_cat:
             screen.blit(background_img,(0,0))
             test = 0
         for event in pygame.event.get():
