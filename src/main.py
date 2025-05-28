@@ -1,13 +1,18 @@
 import pygame
 import player
 from enemy import init_enemy,enemy_goto
+
 pygame.init()
-background = pygame.image.load("src/assets/background.png")
+
+#screen setup
 x = 1920
 y= 1080
+background = pygame.image.load("src/assets/background.png")
 screen = pygame.display.set_mode((x,y))
 background_img = pygame.transform.scale(background,(x,y))
 
+
+#gameloop
 def game_loop():
     FPS = 144
     clock = pygame.time.Clock()
@@ -22,7 +27,7 @@ def game_loop():
     test = 0
 
     #for optimization
-    amount_cat = 4
+    amount_cat = 1
 
     while running:
         fps = clock.get_fps()
@@ -37,12 +42,15 @@ def game_loop():
         enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
         player.movement(player_rect)
 
+
         screen.blit(player_img,player_rect)
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(x/2-50,900))
         screen.blit(batterie_color,(x/2-50+20,910))
 
-        #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
+
+        #enemy generating system
+        repetition = 0
         for i in range(amount_enemy):
             if enemy_rect_dictionary[i][1] > 0:
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0])
@@ -53,6 +61,11 @@ def game_loop():
                 screen.blit(enemy_img,enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
+            else:
+                repetition += 1
+        
+        if repetition == amount_enemy:
+            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
         pygame.display.update()
         print(fps)
         clock.tick(FPS)
