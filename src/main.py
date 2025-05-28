@@ -21,8 +21,8 @@ def game_loop():
     player_life = 100
     while running:
         
-        screen.fill("white")
         screen.blit(background_img,(0,0))
+        screen.fill("white")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
