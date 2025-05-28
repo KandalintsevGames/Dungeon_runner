@@ -6,7 +6,7 @@ import math
 def player_init():
     
     player_size = (100,100)
-    player = pygame.image.load("src/assets/player_movement/movement1.png")
+    player = pygame.image.load("src/assets/player_movement/movement1.png").convert_alpha()
     player_img = pygame.transform.scale(player,player_size)
     player_rect = player.get_rect(center = (960,540))
     return player_img, player_rect
