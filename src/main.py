@@ -9,7 +9,7 @@ screen = pygame.display.set_mode((x,y))
 background_img = pygame.transform.scale(background,(x,y))
 
 def game_loop():
-    FPS = 60
+    FPS = 144
     clock = pygame.time.Clock()
     running = True
 
@@ -19,10 +19,12 @@ def game_loop():
 
     player_img , player_rect = player.player_init()
     player_life = 100
+    test = 0
     while running:
-        
-        screen.blit(background_img,(0,0))
-        screen.fill("white")
+        test +=1
+        if test == 2:
+            screen.blit(background_img,(0,0))
+            test = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -35,7 +37,6 @@ def game_loop():
         
 
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
-        
         for i in range(amount_enemy):
             if enemy_rect_dictionary[i][1] > 0:
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0])
@@ -47,8 +48,8 @@ def game_loop():
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
         pygame.display.update()
-        clock.tick(FPS)
         print(fps)
+        clock.tick(FPS)
     pygame.quit()
 if __name__ == "__main__":
     game_loop()
