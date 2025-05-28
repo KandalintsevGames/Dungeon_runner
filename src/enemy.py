@@ -11,12 +11,12 @@ def init_enemy(enemy_size):
     enemy = pygame.image.load("enemy.png")
     enemy_img = pygame.transform.scale(enemy,enemy_size)
     for i in range(x):
-        enemy_rect_dictionary[i]= enemy.get_rect(center = (0,r.randint(0,1080)))
+        enemy_rect_dictionary[i]= [enemy.get_rect(center = (0,r.randint(0,1080))),100]
     return enemy_img, enemy_rect_dictionary, x
 
 
 def enemy_goto(player_rect,enemy_rect):
-    damage = 100
+    damage = 0
     x_cor_difference =  player_rect.x - enemy_rect.x
     y_cor_difference = player_rect.y - enemy_rect.y 
     #Koordinatendifferenz
@@ -26,7 +26,7 @@ def enemy_goto(player_rect,enemy_rect):
     if length <= 100:
          update_enemy_x = 0
          update_enemy_y  = 0
-         damage = -100
+         damage = -1
     #Falls Gegner zu nahe kommt, bewegt er nicht
     else:
         update_enemy_x = 5 * ((x_cor_difference / (length)))
