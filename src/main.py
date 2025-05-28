@@ -17,17 +17,19 @@ def game_loop():
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
 
-    player_img , player_rect = player.player_init()
+    player_img , player_rect, batterie_color,batterie_base = player.player_init()
     player_life = 100
     test = 0
 
     #for optimization
-    amount_cat = 1
+    amount_cat = 4
 
     while running:
+        fps = clock.get_fps()
         test +=1
         if test == amount_cat:
             screen.blit(background_img,(0,0))
+        #screen.fill("white")
             test = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -36,9 +38,9 @@ def game_loop():
         player.movement(player_rect)
 
         screen.blit(player_img,player_rect)
-
-        fps = clock.get_fps()
-        
+        batterie_color = pygame.transform.scale(batterie_color,(-450*(player_life/100),80))
+        screen.blit(batterie_base,(x/2-50,900))
+        screen.blit(batterie_color,(x/2-50+30,910))
 
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
         for i in range(amount_enemy):
