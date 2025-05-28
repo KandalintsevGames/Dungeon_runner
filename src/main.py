@@ -20,7 +20,10 @@ def game_loop():
     player_img , player_rect = player.player_init()
     player_life = 100
     test = 0
-    amount_cat = 100
+
+    #for optimization
+    amount_cat = 1
+
     while running:
         test +=1
         if test == amount_cat:
