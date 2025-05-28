@@ -11,7 +11,7 @@ def player_init():
     baterie_color = pygame.image.load("src/assets/battery_insides.png").convert_alpha()
     player_img = pygame.transform.scale(player,player_size)
     baterie_base_img = pygame.transform.scale(baterie_base,(500,100))
-    baterie_color_img = pygame.transform.scale(baterie_color,(-450,80))
+    baterie_color_img = pygame.transform.scale(baterie_color,(450,80))
     player_rect = player.get_rect(center = (960,540))
     return player_img, player_rect ,baterie_color_img ,baterie_base_img 
 

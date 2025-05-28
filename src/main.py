@@ -38,9 +38,9 @@ def game_loop():
         player.movement(player_rect)
 
         screen.blit(player_img,player_rect)
-        batterie_color = pygame.transform.scale(batterie_color,(-450*(player_life/100),80))
+        batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(x/2-50,900))
-        screen.blit(batterie_color,(x/2-50+30,910))
+        screen.blit(batterie_color,(x/2-50+20,910))
 
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
         for i in range(amount_enemy):
