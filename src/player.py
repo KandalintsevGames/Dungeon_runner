@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-import math
 
 
 def player_init():
