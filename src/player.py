@@ -29,8 +29,7 @@ def damage(player_life,damage_made):
 #     update_enemy_y = 10 *((y_cor_difference / (length)))
 #     return [int(update_enemy_x),int(update_enemy_y)]
 def Blitzi(enemy_position_dictionary,amount_enemy):
-    keys =pygame.key.get_pressed()
-    if keys[K_b]:
+    if MOUSEBUTTONDOWN:
         mouse_pos = pygame.mouse.get_pos()
         
         #for i in range(amount_enemy):
