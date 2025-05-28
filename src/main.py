@@ -2,11 +2,12 @@ import pygame
 import player
 from enemy import init_enemy,enemy_goto
 pygame.init()
-backgrount = pygame.image.load("src/assets/background.png")
+background = pygame.image.load("src/assets/background.png")
 x = 1920
 y= 1080
 screen = pygame.display.set_mode((x,y))
-backgrount_img = pygame.transform.scale(backgrount,(x,y))
+background_img = pygame.transform.scale(background,(x,y))
+
 def game_loop():
     FPS = 60
     clock = pygame.time.Clock()
@@ -21,7 +22,7 @@ def game_loop():
     while running:
         
         screen.fill("white")
-        screen.blit(backgrount_img,(0,0))
+        screen.blit(background_img,(0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -30,7 +31,7 @@ def game_loop():
 
         screen.blit(player_img,player_rect)
 
-
+        fps = clock.get_fps()
         
 
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
@@ -47,7 +48,7 @@ def game_loop():
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
         pygame.display.update()
         clock.tick(FPS)
-
+        print(fps)
     pygame.quit()
 if __name__ == "__main__":
     game_loop()
