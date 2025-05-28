@@ -2,12 +2,11 @@ import pygame
 import player
 from enemy import init_enemy,enemy_goto
 pygame.init()
-background = pygame.image.load("src/assets/background.png")
+backgrount = pygame.image.load("src/assets/background.png")
 x = 1920
 y= 1080
 screen = pygame.display.set_mode((x,y))
-background_img = pygame.transform.scale(background,(x,y))
-
+backgrount_img = pygame.transform.scale(backgrount,(x,y))
 def game_loop():
     FPS = 60
     clock = pygame.time.Clock()
@@ -20,18 +19,17 @@ def game_loop():
     player_img , player_rect = player.player_init()
     player_life = 100
     while running:
-        
-        screen.fill("white")
-        screen.blit(background_img,(0,0))
+        screen.blit(backgrount_img,(0,0))
+        #screen.fill("white")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
         player.movement(player_rect)
-
         screen.blit(player_img,player_rect)
 
-        fps = clock.get_fps()
+
         
 
         #enemy.enemy_rect = enemy.enemy.get_rect(center = (liste_enemy_movement[0],liste_enemy_movement[1]))
@@ -46,9 +44,10 @@ def game_loop():
                 screen.blit(enemy_img,enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
+
         pygame.display.update()
         clock.tick(FPS)
-        print(fps)
+        print(clock.tick(FPS))
     pygame.quit()
 if __name__ == "__main__":
     game_loop()
