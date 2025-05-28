@@ -38,7 +38,6 @@ def game_loop():
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
                 enemy_life_red = pygame.transform.scale(enemy_life_red,(100*(enemy_rect_dictionary[i][1]/100),50))
-                
                 player_life = player.damage(player_life,enemy_movement[2]) 
                 screen.blit(enemy_img,enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
