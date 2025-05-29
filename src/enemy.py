@@ -1,6 +1,8 @@
+#imports
 import pygame
 import math
 import random as r
+
 pygame.init()
 
 enemy_size = (100,100)

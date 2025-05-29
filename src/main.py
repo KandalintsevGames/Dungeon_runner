@@ -2,6 +2,7 @@
 import pygame
 import player
 from enemy import init_enemy,enemy_goto
+from killcount import text
 
 pygame.init()
 
@@ -44,17 +45,19 @@ def game_loop():
         enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
         player.movement(player_rect)
 
-
+        #Player drawing
         screen.blit(player_img,player_rect)
+
+        #Battery drawing
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(x/2-50,900))
         screen.blit(batterie_color,(x/2-50+20,910))
-
 
         #enemy generating system
         repetition = 0
 
         for i in range(amount_enemy):
+
             # if there are enemies
             if enemy_rect_dictionary[i][1] > 0:
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0])
@@ -63,16 +66,23 @@ def game_loop():
                 enemy_life_red = pygame.transform.scale(enemy_life_red,(100*(enemy_rect_dictionary[i][1]/100),50))
                 player_life = player.damage(player_life,enemy_movement[2]) 
 
-                
+                #drawing enemy 
                 screen.blit(enemy_img,enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
+
             # if there are no enemies
             else:
                 repetition += 1
         
         if repetition == amount_enemy:
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
+
+
+
+        screen.blit(text("killcount"),(50,50))
+
+
 
         pygame.display.update()
         print(fps)
