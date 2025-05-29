@@ -2,9 +2,14 @@
 import pygame
 import player
 from enemy import init_enemy,enemy_goto
+
+
+
+#to improve
 from killcount import text
 
 pygame.init()
+
 
 #screen setup
 x = 1920
@@ -28,6 +33,16 @@ def game_loop():
     player_img , player_rect, batterie_color,batterie_base = player.player_init()
     player_life = 100
     test = 0
+
+
+
+
+    killcount_number = 0
+
+
+
+
+
 
     #for optimization
     amount_cat = 1
@@ -65,7 +80,7 @@ def game_loop():
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
                 enemy_life_red = pygame.transform.scale(enemy_life_red,(100*(enemy_rect_dictionary[i][1]/100),50))
                 player_life = player.damage(player_life,enemy_movement[2]) 
-
+                killcount_number += 1
                 #drawing enemy 
                 screen.blit(enemy_img,enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
@@ -79,8 +94,8 @@ def game_loop():
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
 
 
-
-        screen.blit(text("killcount"),(50,50))
+        # to improve
+        screen.blit(text(killcount_number),(50,50))
 
 
 
