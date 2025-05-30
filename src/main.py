@@ -45,8 +45,8 @@ def game_loop():
 
 
     #for optimization
-    amount_cat = 1
-
+    amount_cat = 4
+    
     while running:
         fps = clock.get_fps()
         test +=1
@@ -67,7 +67,7 @@ def game_loop():
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(x/2-50,900))
         screen.blit(batterie_color,(x/2-50+20,910))
-
+        liste_der_Toden = []
         #enemy generating system
         repetition = 0
 
@@ -80,7 +80,6 @@ def game_loop():
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
                 enemy_life_red = pygame.transform.scale(enemy_life_red,(100*(enemy_rect_dictionary[i][1]/100),50))
                 player_life = player.damage(player_life,enemy_movement[2]) 
-                killcount_number += 1
                 #drawing enemy 
                 screen.blit(enemy_img,enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
@@ -89,10 +88,15 @@ def game_loop():
             # if there are no enemies
             else:
                 repetition += 1
-        
+                
+
+                if i not in liste_der_Toden:
+
+                    killcount_number += 1
+                    liste_der_Toden.append(i)
         if repetition == amount_enemy:
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
-
+            liste_der_Toden = []
 
         # to improve
         screen.blit(text(killcount_number),(50,50))
