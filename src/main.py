@@ -10,7 +10,6 @@ from killcount import text
 
 pygame.init()
 
-
 #screen setup
 x = 1920
 y= 1080
@@ -24,7 +23,7 @@ def game_loop():
     FPS = 144
     clock = pygame.time.Clock()
     running = True
-
+    liste_der_Toden = []
     # init enemy
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
@@ -67,7 +66,7 @@ def game_loop():
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(x/2-50,900))
         screen.blit(batterie_color,(x/2-50+20,910))
-        liste_der_Toden = []
+
         #enemy generating system
         repetition = 0
 
