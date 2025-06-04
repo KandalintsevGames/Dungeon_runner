@@ -34,7 +34,7 @@ def game_loop():
     killcount_number = 0
 
     #for optimization
-    amount_cat = 1
+    amount_cat = 4
     
     while running:
         fps = clock.get_fps()

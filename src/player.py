@@ -54,7 +54,6 @@ def movement(rect,image):
         rect.y += speed                
     if keys[K_a]:
         rect.x -= speed
-        pygame.transform.scale(image,)
     if keys[K_d]:
         rect.x += speed
 
