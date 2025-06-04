@@ -16,10 +16,10 @@ def game_over(screen):
                 mouse = pygame.mouse.get_pos()
                 print(mouse[0],mouse[1])
                 if mouse[0] <= text1_rect.x + 300 and mouse[0] >= text1_rect.x - 300:
-                    if mouse[1] <= text1_rect.y + 100 and mouse[1] >= text1_rect.y - 50:
+                    if mouse[1] <= text1_rect.y + 100 and mouse[1] >= text1_rect.y - 100:
                         running = True
                         return running
-                elif mouse[0] <= text2_rect.x + 300 and mouse[0] >= text2_rect.x - 300:
+                if mouse[0] <= text2_rect.x + 300 and mouse[0] >= text2_rect.x - 300:
                     if mouse[1] <= text2_rect.y + 100 and mouse[1] >= text2_rect.y - 100:
                         running = False
                         return running
