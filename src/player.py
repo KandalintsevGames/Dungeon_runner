@@ -4,12 +4,12 @@ import math
 
 
 def player_init():
-    
-    player_size = (100,100)
+    x_size = 100
+    y_size = 100
     player = pygame.image.load("src/assets/player_movement/movement1.png").convert_alpha()
     baterie_base  =pygame.image.load("src/assets/battery.png").convert_alpha()
     baterie_color = pygame.image.load("src/assets/battery_insides.png").convert_alpha()
-    player_img = pygame.transform.scale(player,player_size)
+    player_img = pygame.transform.scale(player,(x_size,y_size))
     baterie_base_img = pygame.transform.scale(baterie_base,(500,100))
     baterie_color_img = pygame.transform.scale(baterie_color,(450,80))
     player_rect = player.get_rect(center = (960,540))
@@ -35,17 +35,17 @@ def damage(player_life,damage_made):
 
 #weapon
 def Blitzi(enemy_position_dictionary,amount_enemy):
-    if MOUSEBUTTONDOWN:
+    if True:
         mouse_pos = pygame.mouse.get_pos()
         
-        #for i in range(amount_enemy):
+        #for i in range(amount_enif MOUSEBUTTONDOWN:emy):
         #    enemy_pos = enemy_position_dictionary[i][0]
         
         for i in range(amount_enemy):
             if enemy_position_dictionary[i][0].x <= mouse_pos[0] + 50 and enemy_position_dictionary[i][0].x >= mouse_pos[0] - 50 and enemy_position_dictionary[i][0].y <= mouse_pos[1] + 50 and enemy_position_dictionary[i][0].y >= mouse_pos[1] - 50: 
-                enemy_position_dictionary[i][1] = enemy_position_dictionary[i][1] - 10
+                enemy_position_dictionary[i][1] -= 20
     return enemy_position_dictionary
-def movement(rect):
+def movement(rect,image):
     speed = 5
     keys =pygame.key.get_pressed()
     if keys[K_w]:
@@ -54,7 +54,7 @@ def movement(rect):
         rect.y += speed                
     if keys[K_a]:
         rect.x -= speed
-                        
+        pygame.transform.scale(image,)
     if keys[K_d]:
         rect.x += speed
 
