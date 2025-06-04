@@ -2,7 +2,7 @@
 import pygame
 import player
 from enemy import init_enemy,enemy_goto
-
+import game_over
 
 
 from killcount import text
@@ -100,7 +100,14 @@ def game_loop():
             
         if player_life >= 50:
             batterie_color.fill((0,255,0))
+        if player_life <=0:
+            overlay = pygame.Surface((1920,1080),pygame.SRCALPHA)
+            overlay.fill((0,0,0,128))
+            screen.blit(overlay,(0,0))
+            running = game_over.game_over(screen)
+            player_life = 100
         # if there are no enemies
+
         if repetition == amount_enemy:
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
             liste_der_Toden = []
