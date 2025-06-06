@@ -18,8 +18,6 @@ def player_init():
 
 def damage(player_life,damage_made):
     player_life += damage_made
-    if player_life <=0:
-        pygame.quit()
     return player_life
 
 # def Waffe(player_rect):
