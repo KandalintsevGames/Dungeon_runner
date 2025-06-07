@@ -54,4 +54,3 @@ def movement(rect,image):
         rect.x -= speed
     if keys[K_d]:
         rect.x += speed
-

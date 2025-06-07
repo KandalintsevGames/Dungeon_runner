@@ -3,8 +3,6 @@ import pygame
 import player
 from enemy import init_enemy,enemy_goto
 import game_over
-
-
 from killcount import text
 
 pygame.init()
@@ -13,15 +11,18 @@ pygame.init()
 x = 1920
 y= 1080
 background = pygame.image.load("src/assets/background.png")
-screen = pygame.display.set_mode((x,y), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((x,y))
 background_img = pygame.transform.scale(background,(x,y))
 
-#gameloop
+#gameloop function
 def game_loop():
+    
+    # basic pygame setup
     FPS = 144
     clock = pygame.time.Clock()
     running = True
     liste_der_Toden = []
+
     # init enemy
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
@@ -31,20 +32,36 @@ def game_loop():
     player_life = 100
     test = 0
 
+
+    count = 0                                   # to be improved 
+
+    #killcount adjustment
     killcount_number = 0
 
     #for optimization
-    amount_cat = 4
+    amount_cat = 3
     
+
     while running:
         fps = clock.get_fps()
+        # if fps > 0:                           # to be improved 
+        #     if fps < 60 and count >= 7:       # to be improved
+        #         count = 0                     # to be improved
+        #         amount_cat += 1               # to be improved
+
+
+
         print(fps)
+
+
+        #count += 1                             # to be improved
         test +=1
         if test == amount_cat:
             screen.blit(background_img,(0,0))
-        #screen.fill("white")
             test = 0
-        for event in pygame.event.get():
+
+        # event loop setup
+        for event in pygame.event.get():       
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -64,10 +81,7 @@ def game_loop():
         repetition = 0
         damage_ges = 0
         for i in range(amount_enemy):
-            # if there are enemies
             if enemy_rect_dictionary[i][1] > 0:
-            # i = enemy_number
-            # 1 = enemy_lifes
 
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0])
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
@@ -92,6 +106,7 @@ def game_loop():
         if fps > 0 :
             player_life = player.damage(player_life,damage_ges/fps)
 
+        # Adjusting color of player healthbar
         if player_life < 50:
             batterie_color.fill((255,255,0))
 
@@ -100,6 +115,8 @@ def game_loop():
             
         if player_life >= 50:
             batterie_color.fill((0,255,0))
+
+        # Menu after player death
         if player_life <=0:
             overlay = pygame.Surface((1920,1080),pygame.SRCALPHA)
             overlay.fill((0,0,0,128))
@@ -108,22 +125,29 @@ def game_loop():
             player_life = 100
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
             killcount_number = 0
-        # if there are no enemies
 
+        # if there are no enemies
         if repetition == amount_enemy:
+
+            # adjusting enemy parameters
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
+
+            #list of killed enemies
             liste_der_Toden = []
+            # adding lives to player after every wave
             if player_life < 90:
                 player_life += 10
         
 
-        # to improve
+        # drawin killcount
         screen.blit(text(killcount_number),(50,50))
 
-        #print(wave_live)
-
+        # updating screen options
         pygame.display.update()
         clock.tick(FPS)
+
+    # quiting option
+    quit()
     pygame.quit()
 if __name__ == "__main__":
     game_loop()

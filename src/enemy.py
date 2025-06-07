@@ -8,7 +8,7 @@ pygame.init()
 enemy_size = (100,100)
 
 def init_enemy(enemy_size):
-    x = 10#r.randint(1,10)
+    x=r.randint(1,50)
     enemy_rect_dictionary = {"hi":"hallo"}
     enemy = pygame.image.load("src/assets/enemy.png").convert_alpha()
     enemy_life_red = pygame.image.load("src/assets/Lifebar_enemy.png").convert_alpha()
