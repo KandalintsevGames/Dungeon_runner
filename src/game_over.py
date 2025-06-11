@@ -1,8 +1,10 @@
 import pygame
+from asset_source import start_location_path
+
 def game_over(screen):
     pygame.init()
-    font = pygame.font.Font('src/assets/10Pixel-Bold.ttf',300)
-    font1 = pygame.font.Font('src/assets/10Pixel-Bold.ttf',100)
+    font = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',300)
+    font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',100)
     text =font.render('Game over' , True ,(255,255,255) )
     text1 = font1.render('retry' , True ,(255,255,255) )
     text1_rect = text1.get_rect(center = (960,500))

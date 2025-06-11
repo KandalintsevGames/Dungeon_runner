@@ -6,12 +6,17 @@ from enemy import init_enemy,enemy_goto
 import game_over
 from killcount import text
 
+from asset_source import start_location_path
+
+
 pygame.init()
+
+
 
 #screen setup
 x = 1920
 y= 1080
-background = pygame.image.load("src/assets/background.png")
+background = pygame.image.load(f"{start_location_path()}assets/background.png")
 screen = pygame.display.set_mode((x,y))
 background_img = pygame.transform.scale(background,(x,y))
 

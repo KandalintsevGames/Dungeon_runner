@@ -1,14 +1,14 @@
 import pygame
 from pygame.locals import *
-import math
+from asset_source import start_location_path
 
 
 def player_init():
     x_size = 100
     y_size = 100
-    player = pygame.image.load("src/assets/player_movement/movement1.png").convert_alpha()
-    baterie_base  =pygame.image.load("src/assets/battery.png").convert_alpha()
-    baterie_color = pygame.image.load("src/assets/battery_insides.png").convert_alpha()
+    player = pygame.image.load(f"{start_location_path()}assets/player_movement/movement1.png").convert_alpha()
+    baterie_base  =pygame.image.load(f"{start_location_path()}assets/battery.png").convert_alpha()
+    baterie_color = pygame.image.load(f"{start_location_path()}assets/battery_insides.png").convert_alpha()
     player_img = pygame.transform.scale(player,(x_size,y_size))
     baterie_base_img = pygame.transform.scale(baterie_base,(500,100))
     baterie_color_img = pygame.transform.scale(baterie_color,(450,80))
