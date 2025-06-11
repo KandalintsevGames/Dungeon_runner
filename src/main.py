@@ -1,4 +1,5 @@
 # imports
+import Start
 import pygame
 import player
 from enemy import init_enemy,enemy_goto
@@ -20,7 +21,7 @@ def game_loop():
     # basic pygame setup
     FPS = 144
     clock = pygame.time.Clock()
-    running = True
+    running = Start.start(screen)
     liste_der_Toden = []
 
     # init enemy
