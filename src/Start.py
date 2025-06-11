@@ -8,9 +8,9 @@ def start(screen):
     font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',100)
     game_name =font.render('Game' , True ,(255,255,255) )
     start_button = font1.render('Start' , True ,(255,255,255) )
-    text1_rect = start_button.get_rect(center = (960,500))
+    text1_rect = start_button.get_rect(center = (150,500))
     text2 = font1.render('quit' , True ,(255,255,255) )
-    text2_rect = text2.get_rect(center = (960,700))
+    text2_rect = text2.get_rect(center = (150,600))
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

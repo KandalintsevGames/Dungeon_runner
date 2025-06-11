@@ -1,4 +1,5 @@
 # imports
+import bosse
 import Start
 import pygame
 import player
@@ -28,11 +29,12 @@ def game_loop():
     clock = pygame.time.Clock()
     running = Start.start(screen)
     liste_der_Toden = []
-
+    
     # init enemy
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
-
+    dictionary_bosse = bosse.bosse_init(enemy_rect_dictionary)
+    welle = 9
     #init player
     player_img , player_rect, batterie_color,batterie_base = player.player_init()
     player_life = 100
@@ -56,10 +58,6 @@ def game_loop():
         #         amount_cat += 1               # to be improved
 
 
-
-        print(fps)
-
-
         #count += 1                             # to be improved
         test +=1
         if test == amount_cat:
@@ -80,8 +78,8 @@ def game_loop():
 
         #Battery drawing
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
-        screen.blit(batterie_base,(x/2-50,900))
-        screen.blit(batterie_color,(x/2-50+20,910))
+        screen.blit(batterie_base,(10,y-180))
+        screen.blit(batterie_color,(10+20,y-170))
 
         #enemy generating system
         repetition = 0
@@ -89,14 +87,14 @@ def game_loop():
         for i in range(amount_enemy):
             if enemy_rect_dictionary[i][1] > 0:
 
-                enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0])
+                enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0],enemy_rect_dictionary[i][2],enemy_rect_dictionary[i][4])
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
-                enemy_life_red = pygame.transform.scale(enemy_life_red,(100*(enemy_rect_dictionary[i][1]/100),50))
+                enemy_life_red = pygame.transform.scale(enemy_life_red,(100*(enemy_rect_dictionary[i][1]/enemy_rect_dictionary[i][5]),50))
                 damage_ges += enemy_movement[2]
-
+                print(enemy_rect_dictionary[i][1])
                 #drawing enemy 
-                screen.blit(enemy_img,enemy_rect_dictionary[i][0])
+                screen.blit(enemy_rect_dictionary[i][3],enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
 
@@ -124,20 +122,23 @@ def game_loop():
 
         # Menu after player death
         if player_life <=0:
-            overlay = pygame.Surface((1920,1080),pygame.SRCALPHA)
+            overlay = pygame.Surface((x,y),pygame.SRCALPHA)
             overlay.fill((0,0,0,128))
             screen.blit(overlay,(0,0))
             running = game_over.game_over(screen)
             player_life = 100
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
             killcount_number = 0
+            welle = 9 
 
         # if there are no enemies
         if repetition == amount_enemy:
 
             # adjusting enemy parameters
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
-
+            welle += 1
+            if welle%10 == 0:
+                enemy_rect_dictionary,amount_enemy = bosse.bosse_load(enemy_rect_dictionary,dictionary_bosse,amount_enemy,welle)
             #list of killed enemies
             liste_der_Toden = []
             # adding lives to player after every wave
