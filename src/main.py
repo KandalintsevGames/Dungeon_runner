@@ -22,7 +22,7 @@ screen = pygame.display.set_mode((x,y))
 background_img = pygame.transform.scale(background,(x,y))
 
 #gameloop function
-def game_loop():ddd
+def game_loop():
     
     # basic pygame setup
     FPS = 144
@@ -30,8 +30,8 @@ def game_loop():ddd
     running, options = Start.start(screen)
     liste_der_Toden = []
     while options:
-        amount_cat = Start.option()
-        running, options = Start.start()
+        amount_cat = Start.option(screen)
+        running, options = Start.start(screen)
     # init enemy
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
