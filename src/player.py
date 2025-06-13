@@ -40,7 +40,7 @@ def Blitzi(enemy_position_dictionary,amount_enemy):
         #    enemy_pos = enemy_position_dictionary[i][0]
         
         for i in range(amount_enemy):
-            if enemy_position_dictionary[i][0].x <= mouse_pos[0] + 50 and enemy_position_dictionary[i][0].x >= mouse_pos[0] - 50 and enemy_position_dictionary[i][0].y <= mouse_pos[1] + 50 and enemy_position_dictionary[i][0].y >= mouse_pos[1] - 50: 
+            if enemy_position_dictionary[i][0].x <= mouse_pos[0] + enemy_position_dictionary[i][-1] and enemy_position_dictionary[i][0].x >= mouse_pos[0] - enemy_position_dictionary[i][-1] and enemy_position_dictionary[i][0].y <= mouse_pos[1] + enemy_position_dictionary[i][-1] and enemy_position_dictionary[i][0].y >= mouse_pos[1] - enemy_position_dictionary[i][-1]: 
                 enemy_position_dictionary[i][1] -= 20
     return enemy_position_dictionary
 def movement(rect,image):
