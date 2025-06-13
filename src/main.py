@@ -14,15 +14,16 @@ pygame.init()
 
 
 
-#screen setup
-x = 1920
-y= 1080
-background = pygame.image.load(f"{start_location_path()}assets/background.png")
-screen = pygame.display.set_mode((x,y))
-background_img = pygame.transform.scale(background,(x,y))
 
 #gameloop function
 def game_loop():
+    
+    #screen setup
+    x = 1920
+    y= 1080
+    background = pygame.image.load(f"{start_location_path()}assets/background.png")
+    screen = pygame.display.set_mode((x,y))
+    background_img = pygame.transform.scale(background,(x,y))
     
     # basic pygame setup
     FPS = 144
