@@ -22,14 +22,16 @@ screen = pygame.display.set_mode((x,y))
 background_img = pygame.transform.scale(background,(x,y))
 
 #gameloop function
-def game_loop():
+def game_loop():ddd
     
     # basic pygame setup
     FPS = 144
     clock = pygame.time.Clock()
-    running = Start.start(screen)
+    running, options = Start.start(screen)
     liste_der_Toden = []
-    
+    while options:
+        amount_cat = Start.option()
+        running, options = Start.start()
     # init enemy
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
@@ -139,7 +141,7 @@ def game_loop():
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
             welle += 1
             if welle%10 == 0:
-                enemy_rect_dictionary,amount_enemy = bosse.bosse_load(enemy_rect_dictionary,dictionary_bosse,amount_enemy,welle)
+                enemy_rect_dictionary,amount_enemy = bosse.bosse_load(enemy_rect_dictionary,dictionary_bosse,amount_enemy,10)
             #list of killed enemies
             liste_der_Toden = []
             # adding lives to player after every wave
