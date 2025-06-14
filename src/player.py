@@ -6,14 +6,16 @@ from asset_source import start_location_path
 def player_init():
     x_size = 100
     y_size = 100
-    player = pygame.image.load(f"{start_location_path()}assets/player_movement/movement1.png").convert_alpha()
+    player_r = pygame.image.load(f"{start_location_path()}assets/player_right.png").convert_alpha()
+    player_l = pygame.image.load(f"{start_location_path()}assets/player_left.png").convert_alpha()
     baterie_base  =pygame.image.load(f"{start_location_path()}assets/battery.png").convert_alpha()
     baterie_color = pygame.image.load(f"{start_location_path()}assets/battery_insides.png").convert_alpha()
-    player_img = pygame.transform.scale(player,(x_size,y_size))
+    player_r = pygame.transform.scale(player_r,(x_size,y_size))
+    player_l = pygame.transform.scale(player_l,(x_size,y_size))
     baterie_base_img = pygame.transform.scale(baterie_base,(500,100))
     baterie_color_img = pygame.transform.scale(baterie_color,(450,80))
-    player_rect = player.get_rect(center = (960,540))
-    return player_img, player_rect ,baterie_color_img ,baterie_base_img 
+    player_rect = player_r.get_rect(center = (960,540))
+    return player_r, player_rect ,baterie_color_img ,baterie_base_img,player_l 
 
 
 def damage(player_life,damage_made):
@@ -43,14 +45,20 @@ def Blitzi(enemy_position_dictionary,amount_enemy):
             if enemy_position_dictionary[i][0].x <= mouse_pos[0] + enemy_position_dictionary[i][-1] and enemy_position_dictionary[i][0].x >= mouse_pos[0] - enemy_position_dictionary[i][-1] and enemy_position_dictionary[i][0].y <= mouse_pos[1] + enemy_position_dictionary[i][-1] and enemy_position_dictionary[i][0].y >= mouse_pos[1] - enemy_position_dictionary[i][-1]: 
                 enemy_position_dictionary[i][1] -= 20
     return enemy_position_dictionary
-def movement(rect,image):
+
+
+def movement(rect):
     speed = 5
     keys =pygame.key.get_pressed()
+    rotation = 0
     if keys[K_w]:
         rect.y -= speed                
     if keys[K_s]:
         rect.y += speed                
     if keys[K_a]:
         rect.x -= speed
+        rotation = 0
     if keys[K_d]:
         rect.x += speed
+        rotation = 1
+    return rotation

@@ -39,7 +39,7 @@ def game_loop():
     dictionary_bosse = bosse.bosse_init(enemy_rect_dictionary)
     welle = 9
     #init player
-    player_img , player_rect, batterie_color,batterie_base = player.player_init()
+    player_img_r , player_rect, batterie_color, batterie_base, player_img_l = player.player_init()
     player_life = 100
     test = 0
 
@@ -73,11 +73,14 @@ def game_loop():
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
-        
-        player.movement(player_rect,player_img)
 
+        
+        if player.movement(player_rect) == 1:
+            screen.blit(player_img_r,player_rect)
+        if player.movement(player_rect) == 0:
+            screen.blit(player_img_l,player_rect)
         #Player drawing
-        screen.blit(player_img,player_rect)
+        
 
         #Battery drawing
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
