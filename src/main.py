@@ -151,7 +151,6 @@ def game_loop():
             # adding lives to player after every wave
             if player_life < 90:
                 player_life += 10
-        
 
         # drawin killcount
         screen.blit(text(killcount_number),(50,50))
