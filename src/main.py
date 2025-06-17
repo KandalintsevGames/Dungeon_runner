@@ -53,9 +53,13 @@ def game_loop():
     #for optimization
     amount_cat = 3
     
-    # add music
+    # add sounds
     pygame.mixer.music.load(f"{start_location_path()}assets/Vladwave.wav")
     pygame.mixer.music.play(-1)
+
+    wave_end_sound = pygame.mixer.Sound(f"{start_location_path()}assets/achievement-video-game-type-1-230515.mp3")
+    game_over_sound = pygame.mixer.Sound(f"{start_location_path()}assets/game-over-31-179699.mp3")
+
 
     while running:
 
@@ -134,6 +138,7 @@ def game_loop():
 
         # Menu after player death
         if player_life <=0:
+            pygame.mixer.Sound.play(game_over_sound)
             overlay = pygame.Surface((x,y),pygame.SRCALPHA)
             overlay.fill((0,0,0,128))
             screen.blit(overlay,(0,0))
@@ -146,6 +151,7 @@ def game_loop():
         # if there are no enemies
         if repetition == amount_enemy:
 
+            pygame.mixer.Sound.play(wave_end_sound)
             # adjusting enemy parameters
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
             welle += 1
