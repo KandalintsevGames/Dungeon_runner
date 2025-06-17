@@ -7,7 +7,6 @@ from asset_source import start_location_path
 
 pygame.init()
 
-enemy_size = (100,100)
 
 def init_enemy(enemy_size):
     x=r.randint(1,9)
@@ -40,8 +39,8 @@ def enemy_goto(player_rect,enemy_rect,range_enemy,damage_möglich):
          damage = damage_möglich
     #Falls Gegner zu nahe kommt, bewegt er nicht
     else:
-        update_enemy_x = 5 * ((x_cor_difference / (length)))
-        update_enemy_y = 5 *((y_cor_difference / (length)))
+        update_enemy_x = 10 * ((x_cor_difference / (length)))
+        update_enemy_y = 10 *((y_cor_difference / (length)))
     #Berechnung vom Einheitswektor von vohrher
     return [round(update_enemy_x),round(update_enemy_y),damage]
     #Falls Gegner zu nahe kommt, bewegt er nicht
