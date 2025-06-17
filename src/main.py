@@ -29,8 +29,9 @@ def game_loop():
     clock = pygame.time.Clock()
     running, options = Start.start(screen)
     liste_der_Toden = []
+    amount_cat = 3
     while options:
-        amount_cat = Start.option(screen)
+        amount_cat = Start.option(screen,amount_cat)
         running, options = Start.start(screen)
     # init enemy
     enemy_size = (100,100)
@@ -49,7 +50,7 @@ def game_loop():
     killcount_number = 0
 
     #for optimization
-    amount_cat = 3
+    
     
 
     while running:
