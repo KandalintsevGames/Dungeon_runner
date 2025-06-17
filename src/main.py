@@ -54,7 +54,7 @@ def game_loop():
     amount_cat = 3
     
     # add music
-    music = pygame.mixer.music.load(f"{start_location_path()}assets/Vladwave.wav")
+    pygame.mixer.music.load(f"{start_location_path()}assets/Vladwave.wav")
     pygame.mixer.music.play(-1)
 
     while running:
