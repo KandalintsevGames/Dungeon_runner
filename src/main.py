@@ -17,6 +17,7 @@ pygame.init()
 
 #gameloop function
 def game_loop():
+
     
     #screen setup
     x = 1920
@@ -52,8 +53,12 @@ def game_loop():
     #for optimization
     amount_cat = 3
     
+    # add music
+    music = pygame.mixer.music.load(f"{start_location_path()}assets/Vladwave.wav")
+    pygame.mixer.music.play(-1)
 
     while running:
+
         fps = clock.get_fps()
         # if fps > 0:                           # to be improved 
         #     if fps < 60 and count >= 7:       # to be improved
