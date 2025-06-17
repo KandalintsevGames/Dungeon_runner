@@ -59,7 +59,7 @@ def game_loop():
 
     wave_end_sound = pygame.mixer.Sound(f"{start_location_path()}assets/achievement-video-game-type-1-230515.mp3")
     game_over_sound = pygame.mixer.Sound(f"{start_location_path()}assets/game-over-31-179699.mp3")
-
+    enemy_hit_sound = pygame.mixer.Sound(f"{start_location_path()}assets/video-game-hit-noise-001-135821.mp3")
 
     while running:
 
@@ -81,6 +81,8 @@ def game_loop():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
+
+                pygame.mixer.Sound.play(enemy_hit_sound)
                 enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
 
         
