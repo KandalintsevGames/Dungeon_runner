@@ -17,7 +17,8 @@ pygame.init()
 
 #gameloop function
 def game_loop():
-
+    extra = 0
+    sound = 1
     
     #screen setup
     x = 1920
@@ -33,11 +34,11 @@ def game_loop():
     liste_der_Toden = []
     amount_cat = 3
     while options:
-        amount_cat = Start.option(screen,amount_cat)
+        amount_cat,extra,sound = Start.option(screen,amount_cat,extra,sound)
         running, options = Start.start(screen)
     # init enemy
     enemy_size = (100,100)
-    enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
+    enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra )
     dictionary_bosse = bosse.bosse_init(enemy_rect_dictionary)
     welle = 9
     #init player
@@ -57,13 +58,17 @@ def game_loop():
     # add sounds
     pygame.mixer.music.load(f"{start_location_path()}assets/Vladwave.wav")
     pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(sound)
 
     wave_end_sound = pygame.mixer.Sound(f"{start_location_path()}assets/achievement-video-game-type-1-230515.mp3")
     game_over_sound = pygame.mixer.Sound(f"{start_location_path()}assets/game-over-31-179699.mp3")
     enemy_hit_sound = pygame.mixer.Sound(f"{start_location_path()}assets/video-game-hit-noise-001-135821.mp3")
+    wave_end_sound.set_volume(sound)
+    game_over_sound.set_volume(sound)
+    enemy_hit_sound.set_volume(sound)
 
     while running:
-
+        pygame.mixer.music.set_volume(sound)
         fps = clock.get_fps()
         # if fps > 0:                           # to be improved 
         #     if fps < 60 and count >= 7:       # to be improved
@@ -142,6 +147,7 @@ def game_loop():
         # Menu after player death
         if player_life <=0:
             pygame.mixer.Sound.play(game_over_sound)
+            
             overlay = pygame.Surface((x,y),pygame.SRCALPHA)
             overlay.fill((0,0,0,128))
             screen.blit(overlay,(0,0))
@@ -156,7 +162,7 @@ def game_loop():
 
             pygame.mixer.Sound.play(wave_end_sound)
             # adjusting enemy parameters
-            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
+            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra)
             welle += 1
             if welle%10 == 0:
                 enemy_rect_dictionary,amount_enemy = bosse.bosse_load(enemy_rect_dictionary,dictionary_bosse,amount_enemy,10)

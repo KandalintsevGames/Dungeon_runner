@@ -52,13 +52,17 @@ def movement(rect):
     keys =pygame.key.get_pressed()
     rotation = 0
     if keys[K_w]:
-        rect.y -= speed                
+        if rect.y >= 0:
+            rect.y -= speed                
     if keys[K_s]:
-        rect.y += speed                
+        if rect.y <= 920:
+            rect.y += speed                
     if keys[K_a]:
-        rect.x -= speed
-        rotation = 0
+        if rect.x >= 0:
+            rect.x -= speed
+            rotation = 0
     if keys[K_d]:
-        rect.x += speed
-        rotation = 1
+        if rect.x <= 1820:
+            rect.x += speed
+            rotation = 1
     return rotation
