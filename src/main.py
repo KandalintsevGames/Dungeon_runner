@@ -153,7 +153,7 @@ def game_loop():
             screen.blit(overlay,(0,0))
             running = game_over.game_over(screen)
             player_life = 100
-            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size)
+            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra)
             killcount_number = 0
             welle = 9 
 

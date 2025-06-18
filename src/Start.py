@@ -5,13 +5,15 @@ from pygame.locals import *#
 
 def start(screen):
     pygame.init()
+    game = pygame.image.load(f"{start_location_path()}assets/wallpaper_logo.png").convert_alpha()
+    
     font = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',300)
     font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',100)
-    game_name =font.render('Game' , True ,(255,255,255) )
+    game_name =font.render('Runner' , True ,(255,255,255) )
     start_button = font1.render('Start' , True ,(255,255,255) )
     text1_rect = start_button.get_rect(center = (150,500))
     text3 = font1.render('Options' , True ,(255,255,255) )
-    text3_rect = text3.get_rect(center = (150,600))
+    text3_rect = text3.get_rect(center = (170,600))
     text2 = font1.render('quit' , True ,(255,255,255) )
     text2_rect = text2.get_rect(center = (150,700))
     while True:
@@ -33,10 +35,11 @@ def start(screen):
                         running = False
                         return running, False
                 
-        screen.blit(game_name,(300,100))
+        screen.blit(game_name,(90,100))
         screen.blit(start_button,text1_rect)
         screen.blit(text2,text2_rect)
         screen.blit(text3,text3_rect)
+        screen.blit(game,(800,-90))
         pygame.display.update()
 def option(screen,amount_cat,extra,sound):
     pygame.init()
