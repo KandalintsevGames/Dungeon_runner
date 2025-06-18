@@ -19,6 +19,7 @@ pygame.init()
 def game_loop():
     extra = 0
     sound = 1
+
     
     #screen setup
     x = 1920
@@ -67,7 +68,10 @@ def game_loop():
     game_over_sound.set_volume(sound)
     enemy_hit_sound.set_volume(sound)
 
+    #mana
+    mana = 20
     while running:
+        max_mana = 20
         pygame.mixer.music.set_volume(sound)
         fps = clock.get_fps()
         # if fps > 0:                           # to be improved 
@@ -82,14 +86,20 @@ def game_loop():
             screen.blit(background_img,(0,0))
             test = 0
 
+        if mana < max_mana:
+            mana += 1/fps
+
         # event loop setup
         for event in pygame.event.get():       
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-
-                pygame.mixer.Sound.play(enemy_hit_sound)
-                enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
+                # mana
+                if mana >= 2:
+                    mana -= 2
+                    print(mana)
+                    pygame.mixer.Sound.play(enemy_hit_sound)
+                    enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
 
         
         if player.movement(player_rect) == 1:
@@ -116,7 +126,6 @@ def game_loop():
                 enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/enemy_rect_dictionary[i][5]),50))
                 enemy_life_black = pygame.transform.scale(enemy_life_black,(enemy_rect_dictionary[i][6],50))
                 damage_ges += enemy_movement[2]
-                print(enemy_rect_dictionary[i][1])
                 #drawing enemy 
                 screen.blit(enemy_rect_dictionary[i][3],enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
@@ -178,7 +187,6 @@ def game_loop():
         # updating screen options
         pygame.display.update()
         clock.tick(FPS)
-
     # quiting option
     quit()
     pygame.quit()

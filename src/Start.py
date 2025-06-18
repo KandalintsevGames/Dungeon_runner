@@ -4,18 +4,19 @@ from pygame.locals import *#
 
 
 def start(screen):
+    logo_scale = (1920*1.01,1080*1.01)
+
     pygame.init()
-    game = pygame.image.load(f"{start_location_path()}assets/wallpaper_logo.png").convert_alpha()
-    
-    font = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',300)
+    game = pygame.image.load(f"{start_location_path()}assets/wallpaper text.png").convert_alpha()
+    game = pygame.transform.scale(game,logo_scale)
+
     font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',100)
-    game_name =font.render('Runner' , True ,(255,255,255) )
     start_button = font1.render('Start' , True ,(255,255,255) )
-    text1_rect = start_button.get_rect(center = (150,500))
+    text1_rect = start_button.get_rect(center = (480,850))
     text3 = font1.render('Options' , True ,(255,255,255) )
-    text3_rect = text3.get_rect(center = (170,600))
+    text3_rect = text3.get_rect(center = (960,850))
     text2 = font1.render('quit' , True ,(255,255,255) )
-    text2_rect = text2.get_rect(center = (150,700))
+    text2_rect = text2.get_rect(center = (1440,860))
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,11 +36,10 @@ def start(screen):
                         running = False
                         return running, False
                 
-        screen.blit(game_name,(90,100))
         screen.blit(start_button,text1_rect)
         screen.blit(text2,text2_rect)
         screen.blit(text3,text3_rect)
-        screen.blit(game,(800,-90))
+        screen.blit(game,(0,-200))
         pygame.display.update()
 def option(screen,amount_cat,extra,sound):
     pygame.init()
