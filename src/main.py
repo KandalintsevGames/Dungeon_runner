@@ -39,9 +39,9 @@ def game_loop():
         running, options = Start.start(screen)
     # init enemy
     enemy_size = (100,100)
-    enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra )
+    enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y )
     dictionary_bosse = bosse.bosse_init(enemy_rect_dictionary)
-    welle = 9
+    welle = 1
     #init player
     player_img_r , player_rect, batterie_color, batterie_base, player_img_l = player.player_init()
     player_life = 100
