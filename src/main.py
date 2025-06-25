@@ -25,7 +25,7 @@ def game_loop():
     x = 1920
     y=1080
     background = pygame.image.load(f"{start_location_path()}assets/background.png")
-    screen = pygame.display.set_mode((x,y))
+    screen = pygame.display.set_mode((x,y),pygame.FULLSCREEN)
     background_img = pygame.transform.scale(background,(x,y))
     
     font = pygame.font.Font(f"{start_location_path()}assets/10Pixel-Bold.ttf",int(50*(x/1920)))
