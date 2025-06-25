@@ -3,36 +3,36 @@ from asset_source import start_location_path
 from pygame.locals import *#
 
 
-def start(screen):
-    logo_scale = (1920*1.01,1080*1.01)
+def start(screen,x,y):
+    logo_scale = (x*1.01,y*1.01)
 
     pygame.init()
     game = pygame.image.load(f"{start_location_path()}assets/wallpaper text.png").convert_alpha()
     game = pygame.transform.scale(game,logo_scale)
 
-    font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',100)
+    font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',int(100*(x/1920)))
     start_button = font1.render('Start' , True ,(255,255,255) )
-    text1_rect = start_button.get_rect(center = (480,850))
+    text1_rect = start_button.get_rect(center = (x/4,850*(x/1920)))
     text3 = font1.render('Options' , True ,(255,255,255) )
-    text3_rect = text3.get_rect(center = (960,850))
+    text3_rect = text3.get_rect(center = (x/2,850*(x/1920)))
     text2 = font1.render('quit' , True ,(255,255,255) )
-    text2_rect = text2.get_rect(center = (1440,860))
+    text2_rect = text2.get_rect(center = (x*3/4,850*(x/1920)))
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse = pygame.mouse.get_pos()
-                if mouse[0] <= text1_rect.x + 300 and mouse[0] >= text1_rect.x - 300:
-                    if mouse[1] <= text1_rect.y + 100 and mouse[1] >= text1_rect.y - 100:
+                if mouse[0] <= text1_rect.x + 300*(x/1920) and mouse[0] >= text1_rect.x - 300*(x/1920):
+                    if mouse[1] <= text1_rect.y + 100*(x/1920) and mouse[1] >= text1_rect.y - 100*(x/1920):
                         running = True
                         return running, False
-                if mouse[0] <= text3_rect.x + 300 and mouse[0] >= text3_rect.x - 300:
-                    if mouse[1] <= text3_rect.y + 100 and mouse[1] >= text3_rect.y - 100:
+                if mouse[0] <= text3_rect.x + 300*(x/1920) and mouse[0] >= text3_rect.x - 300*(x/1920):
+                    if mouse[1] <= text3_rect.y + 100*(x/1920) and mouse[1] >= text3_rect.y - 100*(x/1920):
                         running = False
                         return running, True
-                if mouse[0] <= text2_rect.x + 300 and mouse[0] >= text2_rect.x - 300:
-                    if mouse[1] <= text2_rect.y + 100 and mouse[1] >= text2_rect.y - 100:
+                if mouse[0] <= text2_rect.x + 300*(x/1920) and mouse[0] >= text2_rect.x - 300*(x/1920):
+                    if mouse[1] <= text2_rect.y + 100*(x/1920) and mouse[1] >= text2_rect.y - 100*(x/1920):
                         running = False
                         return running, False
                 
@@ -41,11 +41,11 @@ def start(screen):
         screen.blit(text3,text3_rect)
         screen.blit(game,(0,-200))
         pygame.display.update()
-def option(screen,amount_cat,extra,sound):
+def option(screen,amount_cat,extra,sound,x,y):
     pygame.init()
 
-    font = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',300)
-    font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',100)
+    font = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',int(300*(x/1920)))
+    font1 = pygame.font.Font(f'{start_location_path()}assets/10Pixel-Bold.ttf',int(100*(x/1920)))
     options =font.render('Options' , True ,(255,255,255) )
     text1 = font1.render(str(amount_cat) , True ,(255,255,255) )
     text1_rect = text1.get_rect(center = (610,500))
@@ -72,10 +72,10 @@ def option(screen,amount_cat,extra,sound):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse = pygame.mouse.get_pos()
                 if mouse[0] <= text3_rect.x + 300 and mouse[0] >= text3_rect.x - 300:
-                   if mouse[1] <= text3_rect.y + 50 and mouse[1] >= text3_rect.y - 50:
+                   if mouse[1] <= text3_rect.y + 50*(1920/x) and mouse[1] >= text3_rect.y - 50*(1920/x):
                        return amount_cat,int(extra),int(sound)/100
                 elif mouse[0] <= text1_rect.x + 100 and mouse[0] >= text1_rect.x - 100 and  mouse[1] <= text1_rect.y + 50 and mouse[1] >= text1_rect.y - 50:
-                    while mouse[0] <= text1_rect.x + 100 and mouse[0] >= text1_rect.x - 100 and  mouse[1] <= text1_rect.y + 50 and mouse[1] >= text1_rect.y - 50:
+                    while mouse[0] <= text1_rect.x + 100 and mouse[0] >= text1_rect.x - 100 and  mouse[1] <= text1_rect.y + 50*(1920/x) and mouse[1] >= text1_rect.y - 50*(1920/x):
                         mouse = pygame.mouse.get_pos()
                         keys =pygame.key.get_pressed()
                         for event in pygame.event.get():

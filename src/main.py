@@ -22,8 +22,8 @@ def game_loop():
 
     
     #screen setup
-    x = 1920
-    y= 1080
+    x = 1020
+    y=580
     background = pygame.image.load(f"{start_location_path()}assets/background.png")
     screen = pygame.display.set_mode((x,y))
     background_img = pygame.transform.scale(background,(x,y))
@@ -31,12 +31,12 @@ def game_loop():
     # basic pygame setup
     FPS = 144
     clock = pygame.time.Clock()
-    running, options = Start.start(screen)
+    running, options = Start.start(screen,x,y)
     liste_der_Toden = []
     amount_cat = 3
     while options:
-        amount_cat,extra,sound = Start.option(screen,amount_cat,extra,sound)
-        running, options = Start.start(screen)
+        amount_cat,extra,sound = Start.option(screen,amount_cat,extra,sound,x,y)
+        running, options = Start.start(screen,x,y)
     # init enemy
     enemy_size = (100,100)
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y )
@@ -70,8 +70,23 @@ def game_loop():
 
     #mana
     mana = 20
-    while running:
+    while running:#
         max_mana = 20
+        if mana >= max_mana:
+            manabar = pygame.image.load(f"{start_location_path()}assets/manabar1.png").convert_alpha()
+        elif mana >= (max_mana/6)*5:
+            manabar =pygame.image.load(f"{start_location_path()}assets/manabar2.png").convert_alpha()
+        elif mana >= (max_mana/6)*4:
+            manabar =pygame.image.load(f"{start_location_path()}assets/manabar3.png").convert_alpha()
+        elif mana >= (max_mana/6)*3:
+            manabar =pygame.image.load(f"{start_location_path()}assets/manabar4.png").convert_alpha()
+        elif mana >= (max_mana/6)*2:
+            manabar =pygame.image.load(f"{start_location_path()}assets/manabar5.png").convert_alpha()
+        elif mana >= (max_mana/6)*1:
+            manabar =pygame.image.load(f"{start_location_path()}assets/manabar6.png").convert_alpha()
+        manabar = pygame.transform.scale(manabar,(80,80))
+        
+        
         pygame.mixer.music.set_volume(sound)
         fps = clock.get_fps()
         # if fps > 0:                           # to be improved 
@@ -88,6 +103,7 @@ def game_loop():
 
         if mana < max_mana:
             mana += 1/fps
+        
 
         # event loop setup
         for event in pygame.event.get():       
@@ -102,9 +118,9 @@ def game_loop():
                     enemy_rect_dictionary= player.Blitzi(enemy_rect_dictionary,amount_enemy)
 
         
-        if player.movement(player_rect) == 1:
+        if player.movement(player_rect,x,y) == 1:
             screen.blit(player_img_r,player_rect)
-        if player.movement(player_rect) == 0:
+        if player.movement(player_rect,x,y) == 0:
             screen.blit(player_img_l,player_rect)
         #Player drawing
         
@@ -126,7 +142,7 @@ def game_loop():
                 enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/enemy_rect_dictionary[i][5]),50))
                 enemy_life_black = pygame.transform.scale(enemy_life_black,(enemy_rect_dictionary[i][6],50))
                 damage_ges += enemy_movement[2]
-                #drawing enemy 
+                #drhttps://prod.liveshare.vsengsaas.visualstudio.com/join?F7E975B9F28AA8403E2326479701A0777334awing enemy 
                 screen.blit(enemy_rect_dictionary[i][3],enemy_rect_dictionary[i][0])
                 screen.blit(enemy_life_black,(enemy_rect_dictionary[i][0].x,enemy_rect_dictionary[i][0].y -30))
                 screen.blit(enemy_life_red,(int(enemy_rect_dictionary[i][0].x),int(enemy_rect_dictionary[i][0].y-30)))
@@ -164,7 +180,8 @@ def game_loop():
             player_life = 100
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y)
             killcount_number = 0
-            welle = 9 
+            mana = max_mana
+            welle = 1
 
         # if there are no enemies
         if repetition == amount_enemy:
@@ -183,7 +200,7 @@ def game_loop():
 
         # drawin killcount
         screen.blit(text(killcount_number),(50,50))
-
+        screen.blit(manabar,(x-200,y-180))
         # updating screen options
         pygame.display.update()
         clock.tick(FPS)

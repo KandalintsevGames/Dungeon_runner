@@ -47,22 +47,22 @@ def Blitzi(enemy_position_dictionary,amount_enemy):
     return enemy_position_dictionary
 
 
-def movement(rect):
+def movement(rect,x,y):
     speed = 5
     keys =pygame.key.get_pressed()
     rotation = 0
     if keys[K_w]:
-        if rect.y >= 0:
+        if rect.top >= 0:
             rect.y -= speed                
     if keys[K_s]:
-        if rect.y <= 920:
+        if rect.bottom <= y:
             rect.y += speed                
     if keys[K_a]:
-        if rect.x >= 0:
+        if rect.left >= 0:
             rect.x -= speed
             rotation = 0
     if keys[K_d]:
-        if rect.x <= 1820:
+        if rect.right <= x:
             rect.x += speed
             rotation = 1
     return rotation
