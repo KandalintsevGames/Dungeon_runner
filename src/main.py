@@ -42,7 +42,7 @@ def game_loop():
     # init enemy
     enemy_size = (100,100)
     welle = 9
-    enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle )
+    enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red1,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle )
     dictionary_bosse = bosse.bosse_init(enemy_rect_dictionary)
     
     #init player
@@ -74,6 +74,7 @@ def game_loop():
     #mana
     mana = 20
     while running:#
+
         max_mana = 20
         if mana >= max_mana:
             manabar = pygame.image.load(f"{start_location_path()}assets/manabar1.png").convert_alpha()
@@ -106,7 +107,7 @@ def game_loop():
             test = 0
 
         if mana < max_mana:
-            mana += 1/fps
+            mana += 2/fps
         
 
         # event loop setup
@@ -142,7 +143,7 @@ def game_loop():
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0],enemy_rect_dictionary[i][2],enemy_rect_dictionary[i][4])
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
-                enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/(100-10)),50))
+                enemy_life_red = pygame.transform.scale(enemy_life_red1,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/enemy_rect_dictionary[i][5]),50))
                 enemy_life_black = pygame.transform.scale(enemy_life_black,(enemy_rect_dictionary[i][6],50))
                 damage_ges += enemy_movement[2]
                 screen.blit(enemy_rect_dictionary[i][3],enemy_rect_dictionary[i][0])
@@ -182,7 +183,7 @@ def game_loop():
             player_rect.centerx = x/2
             player_rect.centery = y/2
             player_life = 100
-            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle)
+            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red1,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle)
             killcount_number = 0
             mana = max_mana
             welle = 9
@@ -192,7 +193,7 @@ def game_loop():
             wave += 1
             pygame.mixer.Sound.play(wave_end_sound)
             # adjusting enemy parameters
-            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle)
+            enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red1,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle)
             welle += 1
             if welle%10 == 0:
                 enemy_rect_dictionary,amount_enemy = bosse.bosse_load(enemy_rect_dictionary,dictionary_bosse,amount_enemy,10)
