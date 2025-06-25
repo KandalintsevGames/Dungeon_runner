@@ -19,15 +19,17 @@ pygame.init()
 def game_loop():
     extra = 0
     sound = 1
-
+    wave = 0
     
     #screen setup
-    x = 1020
-    y=580
+    x = 1920
+    y=1080
     background = pygame.image.load(f"{start_location_path()}assets/background.png")
     screen = pygame.display.set_mode((x,y))
     background_img = pygame.transform.scale(background,(x,y))
     
+    font = pygame.font.Font(f"{start_location_path()}assets/10Pixel-Bold.ttf",int(50*(x/1920)))
+
     # basic pygame setup
     FPS = 144
     clock = pygame.time.Clock()
@@ -86,7 +88,8 @@ def game_loop():
             manabar =pygame.image.load(f"{start_location_path()}assets/manabar6.png").convert_alpha()
         manabar = pygame.transform.scale(manabar,(80,80))
         
-        
+        text_Welle = font.render(f"Welle: {welle}",1, (255,255,255))
+        welle_rect = text_Welle.get_rect(center= (1920/2,50))
         pygame.mixer.music.set_volume(sound)
         fps = clock.get_fps()
         # if fps > 0:                           # to be improved 
@@ -122,14 +125,14 @@ def game_loop():
             screen.blit(player_img_r,player_rect)
         if player.movement(player_rect,x,y) == 0:
             screen.blit(player_img_l,player_rect)
-        #Player drawing
-        
+        #Welle drawing
+        screen.blit(text_Welle,welle_rect)
 
         #Battery drawing
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(10,y-180))
         screen.blit(batterie_color,(10+20,y-170))
-
+            
         #enemy generating system
         repetition = 0
         damage_ges = 0
@@ -177,6 +180,8 @@ def game_loop():
             overlay.fill((0,0,0,128))
             screen.blit(overlay,(0,0))
             running = game_over.game_over(screen)
+            player_rect.centerx = x/2
+            player_rect.centery = y/2
             player_life = 100
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y)
             killcount_number = 0
@@ -185,7 +190,7 @@ def game_loop():
 
         # if there are no enemies
         if repetition == amount_enemy:
-
+            wave += 1
             pygame.mixer.Sound.play(wave_end_sound)
             # adjusting enemy parameters
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y)
