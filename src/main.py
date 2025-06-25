@@ -142,7 +142,7 @@ def game_loop():
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0],enemy_rect_dictionary[i][2],enemy_rect_dictionary[i][4])
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
-                enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/(enemy_rect_dictionary[i][5])),50))
+                enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/(100-10)),50))
                 enemy_life_black = pygame.transform.scale(enemy_life_black,(enemy_rect_dictionary[i][6],50))
                 damage_ges += enemy_movement[2]
                 screen.blit(enemy_rect_dictionary[i][3],enemy_rect_dictionary[i][0])

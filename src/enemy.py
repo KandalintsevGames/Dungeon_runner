@@ -9,7 +9,7 @@ pygame.init()
 
 
 def init_enemy(enemy_size,extra,x,y,welle):
-    x=r.randint(1,9+extra)
+    x1=r.randint(1,9+extra)
     enemy_rect_dictionary = {"hi":"hallo"}
     enemy = pygame.image.load(f"{start_location_path()}assets/enemy.png").convert_alpha()
     enemy_life_red = pygame.image.load(f"{start_location_path()}assets/Lifebar_enemy.png").convert_alpha()
@@ -17,11 +17,11 @@ def init_enemy(enemy_size,extra,x,y,welle):
     enemy_img = pygame.transform.scale(enemy,enemy_size)
     enemy_life_red_img = pygame.transform.scale(enemy_life_red,(100,50))
     enemy_life_black_img = pygame.transform.scale(enemy_life_black,(100,50))
-    
-    for i in range(x):
+    y1 =int( 100+1)
+    for i in range(x1):
         liste_positionen = [(0,r.randint(0,y)),(r.randint(0,x),0),(x,r.randint(0,y)),(r.randint(0,x),y)]
-        enemy_rect_dictionary[i]= [enemy.get_rect(center = liste_positionen[r.randint(0,3)]),100+(welle*5),100,enemy_img,-10-(welle),100,100]
-    return enemy_img, enemy_rect_dictionary, x,enemy_life_red_img,enemy_life_black_img
+        enemy_rect_dictionary[i]= [enemy.get_rect(center = liste_positionen[r.randint(0,3)]),100+(welle*5),100,enemy_img,-10-(welle),y1,100]
+    return enemy_img, enemy_rect_dictionary, x1,enemy_life_red_img,enemy_life_black_img
 
 
 def enemy_goto(player_rect,enemy_rect,range_enemy,damage_möglich):
