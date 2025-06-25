@@ -41,7 +41,7 @@ def game_loop():
         running, options = Start.start(screen,x,y)
     # init enemy
     enemy_size = (100,100)
-    welle = 1
+    welle = 9
     enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle )
     dictionary_bosse = bosse.bosse_init(enemy_rect_dictionary)
     
@@ -143,7 +143,7 @@ def game_loop():
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0],enemy_rect_dictionary[i][2],enemy_rect_dictionary[i][4])
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
-                enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/enemy_rect_dictionary[i][5]),50))
+                enemy_life_red = pygame.transform.scale(enemy_life_red,(enemy_rect_dictionary[i][6]*(enemy_rect_dictionary[i][1]/(enemy_rect_dictionary[i][5])),50))
                 enemy_life_black = pygame.transform.scale(enemy_life_black,(enemy_rect_dictionary[i][6],50))
                 damage_ges += enemy_movement[2]
                 screen.blit(enemy_rect_dictionary[i][3],enemy_rect_dictionary[i][0])
@@ -186,7 +186,7 @@ def game_loop():
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle)
             killcount_number = 0
             mana = max_mana
-            welle = 1
+            welle = 0
 
         # if there are no enemies
         if repetition == amount_enemy:
