@@ -20,7 +20,7 @@ def init_enemy(enemy_size,extra,x,y,welle):
     
     for i in range(x):
         liste_positionen = [(0,r.randint(0,y)),(r.randint(0,x),0),(x,r.randint(0,y)),(r.randint(0,x),y)]
-        enemy_rect_dictionary[i]= [enemy.get_rect(center = liste_positionen[r.randint(0,3)]),100+(welle*5),100,enemy_img,-10-(welle*5),100+(welle * 5),100]
+        enemy_rect_dictionary[i]= [enemy.get_rect(center = liste_positionen[r.randint(0,3)]),100+(welle*5),100,enemy_img,-10-(welle),100,100]
     return enemy_img, enemy_rect_dictionary, x,enemy_life_red_img,enemy_life_black_img
 
 

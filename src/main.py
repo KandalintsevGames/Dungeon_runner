@@ -133,13 +133,12 @@ def game_loop():
         batterie_color = pygame.transform.scale(batterie_color,(450*(player_life/100),80))
         screen.blit(batterie_base,(10,y-180))
         screen.blit(batterie_color,(10+20,y-170))
-            
+        print(mana)
         #enemy generating system
         repetition = 0
         damage_ges = 0
         for i in range(amount_enemy):
             if enemy_rect_dictionary[i][1] > 0:
-                print(enemy_rect_dictionary[i][1])
                 enemy_movement = enemy_goto(player_rect,enemy_rect_dictionary[i][0],enemy_rect_dictionary[i][2],enemy_rect_dictionary[i][4])
                 enemy_rect_dictionary[i][0].x += enemy_movement[0]
                 enemy_rect_dictionary[i][0].y += enemy_movement[1]
@@ -186,7 +185,7 @@ def game_loop():
             enemy_img, enemy_rect_dictionary, amount_enemy,enemy_life_red,enemy_life_black = init_enemy(enemy_size,extra,x,y,welle)
             killcount_number = 0
             mana = max_mana
-            welle = 0
+            welle = 9
 
         # if there are no enemies
         if repetition == amount_enemy:
